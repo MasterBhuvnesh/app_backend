@@ -61,7 +61,13 @@ const UserModel = require('./models/Users');
 const app = express();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from localhost:5173
+    credentials: true, // Allow credentials
+  })
+);
 app.use(express.json());
 
 // Database connection
@@ -135,7 +141,7 @@ app.use((err, req, res, next) => {
 });
 
 // RUN THE SERVER 
-const PORT = process.env.PORT || 5173;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
